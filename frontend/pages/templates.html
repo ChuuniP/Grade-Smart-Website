@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Grade Smart - Thư viện Mẫu phiếu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#004c8b",
+                        "primary": "#00288e",
+                        "primary-fixed": "#dde1ff",
+                        "secondary-fixed": "#d5e4f8",
+                        "on-primary-fixed": "#001453",
+                        "on-primary-container": "#a8b8ff",
+                        "surface-container-highest": "#e0e3e5",
+                        "error": "#ba1a1a",
+                        "outline-variant": "#c4c5d5",
+                        "background": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#3a4858",
+                        "tertiary-fixed": "#d4e3ff",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "tertiary": "#003564",
+                        "on-tertiary-container": "#8fbeff",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#d5e4f8",
+                        "on-tertiary-fixed-variant": "#004883",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eceef0",
+                        "surface": "#f7f9fb",
+                        "secondary-fixed-dim": "#b9c8db",
+                        "surface-dim": "#d8dadc",
+                        "outline": "#757684",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "on-secondary-fixed": "#0e1d2b",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#576676",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#173bab",
+                        "on-background": "#191c1e",
+                        "secondary": "#516070",
+                        "inverse-primary": "#b8c4ff",
+                        "on-surface": "#191c1e",
+                        "inverse-surface": "#2d3133",
+                        "surface-bright": "#f7f9fb",
+                        "surface-variant": "#e0e3e5",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#a4c9ff",
+                        "primary-container": "#1e40af",
+                        "surface-tint": "#3755c3",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#001c39",
+                        "surface-container-high": "#e6e8ea",
+                        "on-surface-variant": "#444653",
+                        "inverse-on-surface": "#eff1f3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "0.25rem",
+                        "2xl": "3rem",
+                        "container-max": "1280px",
+                        "sm": "0.5rem",
+                        "xl": "2rem",
+                        "gutter": "1.5rem",
+                        "base": "4px",
+                        "lg": "1.5rem",
+                        "md": "1rem"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "h3": ["Inter"],
+                        "h2": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "h1": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "h2": ["30px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h1": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "1", "fontWeight": "500"}]
+                    }
+                }
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 h-16 bg-white border-b border-slate-200">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-blue-900">Grade Smart</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-500">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200">
+<img alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOqYeBaLKZumGetVF6UccPWAa7pGUAjzUuuDqFO-ziJWWuIQRlQ8Od5DHw8cQ_Pv_nNCmCEHRuX__eiJwNynmS0Hp_KNOMp9EUp4U_IPHzgU7rYRUWDmIrn7aPIVItwWiYi1bfn0ResdY0Z17tXy7c7gCuJDLhHhK4XwHJCIbM1WvzGaI2FGUekSCFhFzCw6l25oEc-dSn8Fnl5Nx_RieI-DUAZkFTLRGlCKofAUvRES8OApV6KJtVOGA3gnXULUfoWSjmUods4U1E"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col pt-20 pb-6 z-30 w-64 border-r border-slate-200 bg-white">
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-700 font-medium text-sm transition-all duration-200" href="dashboard.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-700 font-medium text-sm transition-all duration-200" href="batch.html">
+<span class="material-symbols-outlined" data-icon="layers_clear">layers_clear</span>
+<span>Chấm hàng loạt</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-700 font-medium text-sm transition-all duration-200" href="instant.html">
+<span class="material-symbols-outlined" data-icon="camera_enhance">camera_enhance</span>
+<span>Chấm đơn lẻ</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-blue-50 text-blue-700 border-r-4 border-blue-700 font-medium text-sm transition-all duration-200" href="templates.html">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Mẫu phiếu</span>
+</a>
+</nav>
+<div class="px-3 pt-6 border-t border-slate-100 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium text-sm transition-all duration-200 text-red-600" href="login.html">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Đăng xuất</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="max-w-7xl mx-auto p-8">
+<!-- Header Section -->
+<div class="flex items-center justify-between mb-8">
+<h2 class="text-h2 font-h2 text-blue-900">Mẫu Phiếu Trả lời</h2>
+</div>
+<!-- Template Grid -->
+<div id="templates-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<!-- Dynamic content will be loaded here -->
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center">
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-white hover:text-primary transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center bg-primary text-white rounded font-bold text-xs">1</button>
+<button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-white hover:text-primary transition-colors font-bold text-xs">2</button>
+<button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-white hover:text-primary transition-colors font-bold text-xs">3</button>
+<button class="w-8 h-8 flex items-center justify-center border border-slate-200 rounded hover:bg-white hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-16 px-4 z-50">
+        <a class="flex flex-col items-center gap-1 text-slate-500" href="dashboard.html">
+            <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+            <span class="text-[10px]">Tổng quan</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-slate-500" href="batch.html">
+            <span class="material-symbols-outlined" data-icon="layers_clear">layers_clear</span>
+            <span class="text-[10px]">Chấm bài</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-blue-800" href="templates.html">
+            <span class="material-symbols-outlined" data-icon="description">description</span>
+            <span class="text-[10px] font-bold">Mẫu phiếu</span>
+        </a>
+    </div>
+<script src="../js/auth-check.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/templates.js"></script>
+</body></html>

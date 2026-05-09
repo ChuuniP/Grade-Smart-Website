@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Grade Smart - Bảng điều khiển Hệ thống Chấm điểm</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#004c8b",
+                    "primary": "#00288e",
+                    "primary-fixed": "#dde1ff",
+                    "secondary-fixed": "#d5e4f8",
+                    "on-primary-fixed": "#001453",
+                    "on-primary-container": "#a8b8ff",
+                    "surface-container-highest": "#e0e3e5",
+                    "error": "#ba1a1a",
+                    "outline-variant": "#c4c5d5",
+                    "background": "#f7f9fb",
+                    "on-secondary-fixed-variant": "#3a4858",
+                    "tertiary-fixed": "#d4e3ff",
+                    "primary-fixed-dim": "#b8c4ff",
+                    "tertiary": "#003564",
+                    "on-tertiary-container": "#8fbeff",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#d5e4f8",
+                    "on-tertiary-fixed-variant": "#004883",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#eceef0",
+                    "surface": "#f7f9fb",
+                    "secondary-fixed-dim": "#b9c8db",
+                    "surface-dim": "#d8dadc",
+                    "outline": "#757684",
+                    "on-secondary": "#ffffff",
+                    "surface-container-low": "#f2f4f6",
+                    "on-secondary-fixed": "#0e1d2b",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#576676",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#173bab",
+                    "on-background": "#191c1e",
+                    "secondary": "#516070",
+                    "inverse-primary": "#b8c4ff",
+                    "on-surface": "#191c1e",
+                    "inverse-surface": "#2d3133",
+                    "surface-bright": "#f7f9fb",
+                    "surface-variant": "#e0e3e5",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#a4c9ff",
+                    "primary-container": "#1e40af",
+                    "surface-tint": "#3755c3",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#001c39",
+                    "surface-container-high": "#e6e8ea",
+                    "on-surface-variant": "#444653",
+                    "inverse-on-surface": "#eff1f3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "xs": "0.25rem",
+                    "2xl": "3rem",
+                    "container-max": "1280px",
+                    "sm": "0.5rem",
+                    "xl": "2rem",
+                    "gutter": "1.5rem",
+                    "base": "4px",
+                    "lg": "1.5rem",
+                    "md": "1rem"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "h3": ["Inter"],
+                    "h2": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "h1": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "h2": ["30px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "h1": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 h-16 bg-white border-b border-slate-200">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-blue-900">Grade Smart</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-500">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200">
+<img alt="User profile avatar" data-alt="Close up portrait of a professional male educator in a bright minimalist office environment with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOqYeBaLKZumGetVF6UccPWAa7pGUAjzUuuDqFO-ziJWWuIQRlQ8Od5DHw8cQ_Pv_nNCmCEHRuX__eiJwNynmS0Hp_KNOMp9EUp4U_IPHzgU7rYRUWDmIrn7aPIVItwWiYi1bfn0ResdY0Z17tXy7c7gCuJDLhHhK4XwHJCIbM1WvzGaI2FGUekSCFhFzCw6l25oEc-dSn8Fnl5Nx_RieI-DUAZkFTLRGlCKofAUvRES8OApV6KJtVOGA3gnXULUfoWSjmUods4U1E"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col pt-20 pb-6 z-30 w-64 border-r border-slate-200 bg-white">
+<nav class="flex-1 px-3 space-y-1">
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-blue-50 text-blue-700 border-r-4 border-blue-700 font-medium text-sm transition-all duration-200" href="dashboard.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-700 font-medium text-sm transition-all duration-200" href="batch.html">
+<span class="material-symbols-outlined" data-icon="layers_clear">layers_clear</span>
+<span>Chấm hàng loạt</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-700 font-medium text-sm transition-all duration-200" href="instant.html">
+<span class="material-symbols-outlined" data-icon="camera_enhance">camera_enhance</span>
+<span>Chấm đơn lẻ</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-700 font-medium text-sm transition-all duration-200" href="templates.html">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Mẫu phiếu</span>
+</a>
+</nav>
+<div class="px-3 pt-6 border-t border-slate-100 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium text-sm transition-all duration-200 text-red-600" href="login.html">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Đăng xuất</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="max-w-7xl mx-auto p-8">
+<!-- Welcome Header -->
+<header class="mb-10">
+<h1 class="text-h1 font-h1 text-blue-900 mb-2">Dashboard</h1>
+<p class="text-body-md text-slate-500">Quản lý hiệu quả các mẫu phiếu trả lời và các phiên chấm điểm.</p>
+</header>
+<!-- Quick Navigation Section -->
+<section class="mb-12">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="group relative overflow-hidden bg-white border border-slate-200 p-8 rounded-xl hover:border-primary transition-all duration-300 flex items-center justify-between cursor-pointer" id="nav-batch">
+<div class="z-10">
+<div class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center mb-4 text-primary">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+</div>
+<h3 class="text-h3 font-h3 text-blue-900 mb-2">Chấm điểm Hàng loạt</h3>
+<p class="text-body-sm text-slate-500 max-w-xs">Tải lên các tập tin phiếu quét của học sinh để xử lý và chấm điểm tự động bằng AI.</p>
+</div>
+<div class="z-10">
+<span class="material-symbols-outlined text-4xl text-blue-200 group-hover:text-primary transition-colors" data-icon="arrow_forward">arrow_forward</span>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none transform group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-9xl" data-icon="layers">layers</span>
+</div>
+</div>
+<div class="group relative overflow-hidden bg-primary p-8 rounded-xl hover:shadow-xl transition-all duration-300 flex items-center justify-between cursor-pointer" id="nav-instant">
+<div class="z-10">
+<div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4 text-white">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+</div>
+<h3 class="text-h3 font-h3 text-white mb-2">Chấm điểm Thời gian thực</h3>
+<p class="text-body-sm text-blue-100 max-w-xs">Sử dụng camera của bạn để chấm điểm từng trang ngay lập tức với phản hồi trực tiếp về lỗi.</p>
+</div>
+<div class="z-10 text-white">
+<span class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform" data-icon="bolt">bolt</span>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 pointer-events-none transform group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-9xl text-white" data-icon="qr_code_scanner">qr_code_scanner</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Answer Sheet Template Management -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-h2 font-h2 text-blue-900">Mẫu Phiếu Trả lời</h2>
+<a class="text-primary font-bold text-sm hover:underline" href="templates.html">Xem tất cả</a>
+</div>
+<div id="templates-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Template Card 1 -->
+<div class="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
+<div class="h-56 bg-slate-100 overflow-hidden relative">
+<img alt="20-question sheet thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist top-down view of a clean 20-question multiple choice answer sheet with bubble circles on high-quality white paper" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvP6cBsQ1nJ3Kj3zAM7U5NGqkcpWcEXGJtj9kssPrDwjXkOj-UW9jmU-J4DpDsP3eMHgOCm2vh5gTQNnz35U6aYRTRgDLnxHQaxCu5r2Mbe-zTBSZT54I89P7lbyMZlwZqzsuTkvBXmIG7VtwfrtoiAQ8pPStTXs5Hng375oMtyANksa7d-Y6xHEnixilb2pWba7VyGgaVqXSuvb2jdaBG3KVD8SI5iZ5UTiiaE8oNhAwdgfdLVtI9nWnB0-szuUhZJJtjgG1rYIFc"/>
+</div>
+<div class="p-6">
+<div class="flex items-start justify-between mb-4">
+<div>
+<h4 class="font-bold text-slate-900 text-body-lg">Bài trắc nghiệm Ngắn Tiêu chuẩn</h4>
+<p class="text-slate-500 text-body-sm">Hoàn hảo cho các bài kiểm tra ngắn</p>
+</div>
+</div>
+<div class="flex items-center gap-4 mb-6 text-slate-500 text-body-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="format_list_numbered">format_list_numbered</span>
+<span>20 Câu hỏi</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="description">description</span>
+<span>Trang A4</span>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-white border-2 border-primary text-primary font-bold py-2.5 rounded-lg hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+<span>Tải xuống PDF</span>
+</button>
+</div>
+</div>
+<!-- Template Card 2 -->
+<div class="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow group border-primary/20 shadow-sm">
+<div class="h-56 bg-slate-100 overflow-hidden relative">
+<img alt="50-question sheet thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close up of a 50-question optical mark recognition OMR sheet with rows of bubbles and a clean corporate academic layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXJDolQq5oT64a6PaepfeWvSr9N3XHcS-4De1WcgmBDbnioOGMdcanPz9e0yS_MZuI7t1j6JeDsKbmpjBnPNuLZXMStYbhoPMgXbijoMIs1zCMSANsquxjzALwiCAwXV2b4FiGPx_FWUKZLq4szPKCGacfiq-Fma6r2__17N4I0Md1p6k_NUqxo5WBLN8Ofq8KdJllWOuiS52mGgwnud1H5g6Qn-N4f1Qj6gmjs2jPrCIogbUZnuILjDhWl4WzR6ruwhxJQWt_byqP"/>
+</div>
+<div class="p-6">
+<div class="flex items-start justify-between mb-4">
+<div>
+<h4 class="font-bold text-slate-900 text-body-lg">Bài thi Đầy đủ</h4>
+<p class="text-slate-500 text-body-sm">Các kỳ thi giữa kỳ và cuối kỳ</p>
+</div>
+</div>
+<div class="flex items-center gap-4 mb-6 text-slate-500 text-body-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="format_list_numbered">format_list_numbered</span>
+<span>50 Câu hỏi</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="description">description</span>
+<span>Trang A4</span>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-white font-bold py-2.5 rounded-lg hover:bg-blue-800 transition-all shadow-md">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+<span>Tải xuống PDF</span>
+</button>
+</div>
+</div>
+<!-- Template Card 3 -->
+<div class="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
+<div class="h-56 bg-slate-100 overflow-hidden relative">
+<img alt="120-question national exam sheet thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Wide shot of a landscape oriented high-density answer sheet with many bubbles and barcodes for professional national exams" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ6PsO-CEXx6lKEC9zk2Z5JZCDNWkYgHoSbhBmR2_F8Esf5pRD6i8CFQlcg_h35SKogLZBxd7AUJZbyK2wG3TT2KCeZpCcbNKeaUyjnkzR_xBuqwIriEUXr-_lIDkq-VHaGAMYyUVyGd8tUriyicQ-NaGt2KwSynLFMGRPM4SMAoNxMoCs4bdI2QB4wkd11TdtRM-09tFuYEENlPLiKo0TOosVibeUZme01Q_tLQUs1tbKfVpvw2hrhz6vDgvVqZivlkyYfLvSE41G"/>
+</div>
+<div class="p-6">
+<div class="flex items-start justify-between mb-4">
+<div>
+<h4 class="font-bold text-slate-900 text-body-lg">Phiếu Thi Quốc gia</h4>
+<p class="text-slate-500 text-body-sm">Dung lượng cao tiêu chuẩn doanh nghiệp</p>
+</div>
+</div>
+<div class="flex items-center gap-4 mb-6 text-slate-500 text-body-sm">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="format_list_numbered">format_list_numbered</span>
+<span>120 Câu hỏi</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="description">description</span>
+<span>A3/Khổ ngang</span>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-white border-2 border-primary text-primary font-bold py-2.5 rounded-lg hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+<span>Tải xuống PDF</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+    <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-16 px-4 z-50">
+        <a class="flex flex-col items-center gap-1 text-blue-800" href="dashboard.html">
+            <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+            <span class="text-[10px] font-bold">Tổng quan</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-slate-500" href="batch.html">
+            <span class="material-symbols-outlined" data-icon="layers_clear">layers_clear</span>
+            <span class="text-[10px]">Chấm bài</span>
+        </a>
+        <a class="flex flex-col items-center gap-1 text-slate-500" href="templates.html">
+            <span class="material-symbols-outlined" data-icon="description">description</span>
+            <span class="text-[10px]">Mẫu phiếu</span>
+        </a>
+    </div>
+<script src="../js/auth-check.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/dashboard.js"></script>
+</body></html>

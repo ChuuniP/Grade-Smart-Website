@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Grade Smart - Chấm bài hàng loạt</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed-variant": "#3a4858",
+                      "tertiary-container": "#004c8b",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#d5e4f8",
+                      "on-tertiary-fixed": "#001c39",
+                      "on-primary-fixed-variant": "#173bab",
+                      "secondary": "#516070",
+                      "on-surface-variant": "#444653",
+                      "surface-container": "#eceef0",
+                      "primary-fixed": "#dde1ff",
+                      "on-surface": "#191c1e",
+                      "on-background": "#191c1e",
+                      "background": "#f7f9fb",
+                      "primary-fixed-dim": "#b8c4ff",
+                      "outline-variant": "#c4c5d5",
+                      "error": "#ba1a1a",
+                      "primary-container": "#1e40af",
+                      "on-secondary-fixed": "#0e1d2b",
+                      "surface-dim": "#d8dadc",
+                      "secondary-container": "#d5e4f8",
+                      "on-tertiary-fixed-variant": "#004883",
+                      "surface": "#f7f9fb",
+                      "surface-container-low": "#f2f4f6",
+                      "surface-tint": "#3755c3",
+                      "inverse-surface": "#2d3133",
+                      "surface-container-high": "#e6e8ea",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "surface-container-highest": "#e0e3e5",
+                      "inverse-on-surface": "#eff1f3",
+                      "outline": "#757684",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#003564",
+                      "tertiary-fixed": "#d4e3ff",
+                      "surface-bright": "#f7f9fb",
+                      "primary": "#00288e",
+                      "on-primary-fixed": "#001453",
+                      "on-tertiary-container": "#8fbeff",
+                      "surface-variant": "#e0e3e5",
+                      "secondary-fixed-dim": "#b9c8db",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-primary": "#b8c4ff",
+                      "on-secondary-container": "#576676",
+                      "on-primary-container": "#a8b8ff",
+                      "tertiary-fixed-dim": "#a4c9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "1rem",
+                      "container-max": "1280px",
+                      "xs": "0.25rem",
+                      "lg": "1.5rem",
+                      "sm": "0.5rem",
+                      "gutter": "1.5rem",
+                      "base": "4px",
+                      "xl": "2rem",
+                      "2xl": "3rem"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "h1": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "h3": ["Inter"],
+                      "h2": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "h1": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-sm": ["12px", {"lineHeight": "1", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "1", "fontWeight": "500"}],
+                      "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "h2": ["30px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased overflow-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 h-16 bg-white border-b border-slate-200">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold tracking-tight text-blue-900">Grade Smart</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-slate-500">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-slate-200">
+<img alt="User profile avatar" data-alt="Close up portrait of a professional male educator in a bright minimalist office environment with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOqYeBaLKZumGetVF6UccPWAa7pGUAjzUuuDqFO-ziJWWuIQRlQ8Od5DHw8cQ_Pv_nNCmCEHRuX__eiJwNynmS0Hp_KNOMp9EUp4U_IPHzgU7rYRUWDmIrn7aPIVItwWiYi1bfn0ResdY0Z17tXy7c7gCuJDLhHhK4XwHJCIbM1WvzGaI2FGUekSCFhFzCw6l25oEc-dSn8Fnl5Nx_RieI-DUAZkFTLRGlCKofAUvRES8OApV6KJtVOGA3gnXULUfoWSjmUods4U1E"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex h-screen w-full pt-16 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-full py-6 z-30 w-64 border-r border-slate-200 bg-white shrink-0">
+<nav class="flex-1 px-3 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-700 font-medium text-sm transition-all duration-200" href="dashboard.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-blue-50 text-blue-700 border-r-4 border-blue-700 font-medium text-sm transition-all duration-200" href="batch.html">
+<span class="material-symbols-outlined" data-icon="layers_clear">layers_clear</span>
+<span>Chấm hàng loạt</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-700 font-medium text-sm transition-all duration-200" href="instant.html">
+<span class="material-symbols-outlined" data-icon="camera_enhance">camera_enhance</span>
+<span>Chấm đơn lẻ</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 hover:bg-slate-50 hover:text-blue-700 font-medium text-sm transition-all duration-200" href="templates.html">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Mẫu phiếu</span>
+</a>
+</nav>
+<div class="px-3 pt-6 border-t border-slate-100 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium text-sm transition-all duration-200 text-red-600" href="login.html">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Đăng xuất</span>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden">
+<header class="flex justify-between items-center w-full px-6 h-16 bg-white border-b border-slate-200 shrink-0">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold tracking-tight text-blue-900">Chấm bài hàng loạt</h2>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-gutter bg-background">
+<div class="max-w-container-max mx-auto space-y-lg">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<div class="lg:col-span-8 space-y-lg">
+<section class="bg-white border border-outline-variant rounded-xl p-6 shadow-sm">
+                            <div id="drop-zone" class="border-2 border-dashed border-slate-300 rounded-xl py-12 px-8 flex flex-col items-center justify-center text-center bg-slate-50/50 hover:bg-slate-50 transition-colors cursor-pointer group">
+                                <input type="file" id="file-input" multiple class="hidden" accept="image/*">
+                                <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                    <span class="material-symbols-outlined text-blue-800 text-3xl" data-icon="upload">upload</span>
+                                </div>
+                                <h3 class="text-body-lg font-semibold text-slate-800">Kéo và thả tệp tại đây hoặc nhấp để chọn tệp</h3>
+                                <p class="text-body-sm text-slate-500 mt-2">Hỗ trợ JPG, PNG, tối đa 50MB (Chỉ nhận tệp hình ảnh)</p>
+                            </div>
+</section>
+<section class="bg-white border border-outline-variant rounded-xl p-6 shadow-sm overflow-hidden">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-h3 text-slate-800">Tiến trình xử lý</h3>
+<button class="px-6 py-2.5 bg-primary text-white rounded-full font-semibold flex items-center gap-2 hover:bg-primary-container transition-all active:scale-95">
+<span class="material-symbols-outlined text-xl" data-icon="play_arrow">play_arrow</span>
+                                        Bắt đầu chấm bài
+                                    </button>
+</div>
+<div class="mb-4">
+<div class="flex justify-between items-center mb-2">
+<span class="text-label-md text-slate-600">Đang nhận diện phiếu: Phieu_09.png</span>
+<span class="text-label-md font-bold text-primary">65%</span>
+</div>
+<div class="h-3 w-full bg-blue-50 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 65%"></div>
+</div>
+</div>
+</section>
+<section class="bg-white border border-outline-variant rounded-xl shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-100 flex items-center justify-between bg-white">
+<h3 class="text-h3 text-slate-800">Kết quả chấm bài</h3>
+<button class="flex items-center gap-2 px-4 py-2 border border-blue-800 text-blue-800 rounded-lg hover:bg-blue-50 transition-colors font-medium text-sm">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                                        Xuất file Excel
+                                    </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-slate-50">
+<tr>
+<th class="px-6 py-4 text-label-sm text-slate-500 tracking-wider">MÃ HỌC SINH</th>
+<th class="px-6 py-4 text-label-sm text-slate-500 tracking-wider">MÃ ĐỀ</th>
+<th class="px-6 py-4 text-label-sm text-slate-500 tracking-wider">ĐIỂM SỐ</th>
+<th class="px-6 py-4 text-label-sm text-slate-500 tracking-wider text-right">TRẠNG THÁI</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-body-sm font-semibold text-slate-700">HS2024-001</td>
+<td class="px-6 py-4 text-body-sm text-slate-600">101</td>
+<td class="px-6 py-4 text-body-sm font-bold text-slate-800">9.5</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">Hợp lệ</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-body-sm font-semibold text-slate-700">HS2024-002</td>
+<td class="px-6 py-4 text-body-sm text-slate-600">101</td>
+<td class="px-6 py-4 text-body-sm font-bold text-slate-800">8.0</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">Hợp lệ</span>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 transition-colors">
+<td class="px-6 py-4 text-body-sm font-semibold text-slate-700">Chưa nhận diện</td>
+<td class="px-6 py-4 text-body-sm text-slate-600">--</td>
+<td class="px-6 py-4 text-body-sm font-bold text-slate-800">--</td>
+<td class="px-6 py-4 text-right">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-800">Lỗi mã tô</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<div class="lg:col-span-4 space-y-lg">
+<section class="bg-white border border-outline-variant rounded-xl p-6 shadow-sm">
+<h3 class="text-label-sm text-slate-400 mb-4 uppercase tracking-widest">Bộ kiểm tra hợp lệ</h3>
+<div class="grid grid-cols-3 gap-2 mb-6">
+<div class="bg-slate-50 p-3 rounded-lg text-center">
+<p class="text-xl font-bold text-slate-800">15</p>
+<p class="text-[10px] text-slate-500 uppercase">Tổng cộng</p>
+</div>
+<div class="bg-green-50 p-3 rounded-lg text-center">
+<p class="text-xl font-bold text-green-700">12</p>
+<p class="text-[10px] text-green-600 uppercase">Hợp lệ</p>
+</div>
+<div class="bg-red-50 p-3 rounded-lg text-center">
+<p class="text-xl font-bold text-red-700">3</p>
+<p class="text-[10px] text-red-600 uppercase">Lỗi</p>
+</div>
+</div>
+<div class="space-y-2 max-h-64 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-200">
+<div class="flex items-center justify-between p-2 rounded border border-slate-100 text-xs">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-slate-400" data-icon="image">image</span> Phieu_01.jpg</span>
+<span class="text-green-600 font-bold">Hợp lệ</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded border border-slate-100 text-xs">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-slate-400" data-icon="image">image</span> Phieu_02.png</span>
+<span class="text-green-600 font-bold">Hợp lệ</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded border border-red-100 bg-red-50/50 text-xs">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-red-400" data-icon="warning">warning</span> Phieu_03.jpg</span>
+<span class="text-red-600 font-bold">Không hợp lệ</span>
+</div>
+</div>
+</section>
+<section class="bg-white border border-outline-variant rounded-xl p-6 shadow-sm">
+<h3 class="text-h3 text-slate-800 mb-6">Biểu đồ phân bổ điểm số</h3>
+<div class="h-48 flex items-end justify-between gap-2 px-2 border-b border-slate-100">
+<div class="flex-1 bg-blue-100 rounded-t-sm group relative" style="height: 15%">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity">2 HS</div>
+</div>
+<div class="flex-1 bg-blue-200 rounded-t-sm group relative" style="height: 35%">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity">5 HS</div>
+</div>
+<div class="flex-1 bg-blue-400 rounded-t-sm group relative" style="height: 60%">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity">8 HS</div>
+</div>
+<div class="flex-1 bg-primary rounded-t-sm group relative" style="height: 90%">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity">12 HS</div>
+</div>
+<div class="flex-1 bg-blue-600 rounded-t-sm group relative" style="height: 45%">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity">6 HS</div>
+</div>
+</div>
+<div class="flex justify-between mt-2 text-[10px] text-slate-400 font-bold px-2">
+<span>0-2</span>
+<span>2-4</span>
+<span>4-6</span>
+<span>6-8</span>
+<span>8-10</span>
+</div>
+<div class="mt-6 space-y-3">
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-slate-500">Trung bình:</span>
+<span class="font-bold text-slate-800">7.8</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-slate-500">Cao nhất:</span>
+<span class="font-bold text-primary">10.0</span>
+</div>
+<div class="flex justify-between items-center text-body-sm">
+<span class="text-slate-500">Thấp nhất:</span>
+<span class="font-bold text-error">4.5</span>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-16 px-4 z-50">
+<a class="flex flex-col items-center gap-1 text-slate-500" href="dashboard.html">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[10px]">Tổng quan</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-blue-800" href="batch.html">
+<span class="material-symbols-outlined" data-icon="layers_clear">layers_clear</span>
+<span class="text-[10px] font-bold">Chấm bài</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="templates.html">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="text-[10px]">Mẫu phiếu</span>
+</a>
+</div>
+<script src="../js/batch.js"></script>
+</body></html>
