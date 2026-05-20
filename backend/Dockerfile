@@ -22,14 +22,14 @@ ENV PYTHON=python3
 ENV PORT=3000
 ENV NODE_ENV=production
 
-# Sao chép các tệp package.json và package-lock.json trước để tối ưu hóa bộ nhớ đệm Docker
-COPY package*.json ./
+# Sao chép các tệp package.json và package-lock.json từ thư mục backend
+COPY backend/package*.json ./
 
 # Cài đặt toàn bộ dependencies (bao gồm prisma trong devDependencies để generate Client)
 RUN npm install
 
 # Sao chép toàn bộ mã nguồn backend vào container
-COPY . .
+COPY backend/ .
 
 # Đảm bảo các thư mục upload và template tồn tại
 RUN mkdir -p uploads templates
