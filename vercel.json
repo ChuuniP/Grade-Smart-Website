@@ -1,9 +1,12 @@
 {
+  "installCommand": "cd frontend && npm install",
+  "buildCommand": "cd frontend && npm install",
+  "outputDirectory": "frontend",
   "cleanUrls": true,
   "redirects": [
     {
       "source": "/",
-      "destination": "/frontend/pages/login.html",
+      "destination": "/pages/login.html",
       "permanent": false
     }
   ]
