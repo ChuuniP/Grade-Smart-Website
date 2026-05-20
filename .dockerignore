@@ -1,0 +1,18 @@
+# Exclude local node_modules from all folders
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# Exclude secrets and config
+.env
+backend/.env
+.git
+.github
+
+# Exclude local upload and temporary files
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/templates/*
+!backend/templates/.gitkeep
+backend/debug_crops/
+*.log
