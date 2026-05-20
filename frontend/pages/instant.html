@@ -144,19 +144,65 @@
 <!-- Main Content Area -->
 <main class="ml-64 flex-1 p-8 bg-surface">
 <div class="max-w-[1280px] mx-auto">
-<div class="flex items-center justify-between mb-8">
+<div class="flex flex-col gap-6 mb-8">
 <div>
 <h1 class="font-h1 text-h1 text-blue-900">Chấm bài tức thì</h1>
 <p class="text-on-surface-variant font-body-md text-body-sm mt-1">Sử dụng AI để quét và nhận diện kết quả bài làm theo thời gian thực.</p>
 </div>
+<div id="answer-sets-section" class="bg-white rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+<div class="px-6 py-5 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-slate-100">
+<div>
+<p class="text-xs uppercase tracking-[0.18em] text-slate-500 font-semibold mb-1">Bộ đáp án</p>
+<h2 class="text-lg font-semibold text-slate-900">Quản lý bộ đáp án</h2>
+<p class="text-slate-500 mt-0.5 text-sm">Tạo bộ đáp án tham chiếu để dùng chung khi chấm đơn lẻ.</p>
+</div>
+<div class="flex items-center gap-3">
+<button id="new-answer-set-btn" class="inline-flex items-center justify-center rounded-xl border border-blue-700 bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800 transition">
+<span class="material-symbols-outlined text-base">add</span>
+<span>Thêm bộ đáp án</span>
+</button>
+<button id="toggle-answer-sets-btn" class="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-all flex items-center justify-center border border-slate-200 bg-white" title="Thu gọn / Mở rộng">
+<span id="toggle-answer-sets-icon" class="material-symbols-outlined select-none text-xl transition-transform duration-300">expand_less</span>
+</button>
+</div>
+</div>
+<div id="answer-sets-content" class="transition-all duration-300">
+<div id="answer-set-list" class="px-6 pb-6 pt-5">
+<div class="text-slate-500 italic">Chưa có bộ đáp án nào. Nhấn dấu cộng để tạo mới.</div>
+</div>
+<div id="answer-set-form" class="px-6 pb-6 hidden">
+<div class="grid gap-4 md:grid-cols-3">
+<label class="block">
+<span class="text-sm font-medium text-slate-700">Mẫu phiếu</span>
+<select id="answer-template-select" class="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm">
+<option value="">Chọn mẫu phiếu</option>
+</select>
+</label>
+<label class="block">
+<span class="text-sm font-medium text-slate-700">Số lượng câu</span>
+<input id="answer-question-count" type="number" min="1" max="200" placeholder="Số câu" class="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm">
+</label>
+<label class="block">
+<span class="text-sm font-medium text-slate-700">Tên bộ đề</span>
+<input id="answer-set-name" type="text" placeholder="Tên bộ đáp án" class="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm">
+</label>
+</div>
+<div id="answer-fields-container" class="mt-6 grid gap-3"></div>
+<div class="mt-5 flex flex-col sm:flex-row gap-3">
+<button id="save-answer-set-btn" class="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-5 py-3 text-sm font-semibold text-white hover:bg-emerald-700 transition">Lưu bộ đáp án</button>
+<button id="cancel-answer-set-btn" class="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition">Hủy</button>
+</div>
+</div>
+</div>
+</div>
 <div class="flex gap-3">
-<button class="px-6 py-2.5 rounded-xl border border-outline text-primary font-label-md flex items-center gap-2 bg-white hover:bg-surface-container transition-all">
+<button id="regrade-btn" class="px-6 py-2.5 rounded-xl border border-outline text-primary font-label-md flex items-center gap-2 bg-white hover:bg-surface-container transition-all">
 <span class="material-symbols-outlined text-[20px]" data-icon="refresh">refresh</span>
                             Chấm lại
                         </button>
-<button class="px-6 py-2.5 rounded-xl bg-primary text-white font-label-md flex items-center gap-2 hover:shadow-lg transition-all">
-<span class="material-symbols-outlined text-[20px]" data-icon="save">save</span>
-                            Lưu kết quả
+<button id="reset-page-btn" class="px-6 py-2.5 rounded-xl bg-primary text-white font-label-md flex items-center gap-2 hover:shadow-lg transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="restart_alt">restart_alt</span>
+                            Reset trang
                         </button>
 </div>
 </div>
@@ -180,9 +226,16 @@
                                         <span class="material-symbols-outlined">upload</span>
                                         Tải ảnh lên
                                     </button>
+                                    <button id="test-btn" class="flex items-center gap-3 px-6 py-3 bg-amber-600 text-white rounded-xl font-bold hover:bg-amber-700 transition-all">
+                                        <span class="material-symbols-outlined">science</span>
+                                        Test
+                                    </button>
                                     <input type="file" id="instant-file-input" class="hidden" accept="image/*">
                                 </div>
                                 <p class="text-white/40 text-sm font-medium">Đặt phiếu trả lời trước camera để tự động nhận diện</p>
+                            </div>
+                            <div id="graded-image-container" class="hidden absolute inset-0 z-20 flex items-center justify-center bg-black">
+                                <img id="graded-image" class="w-full h-full object-contain" alt="Phiếu đã chấm">
                             </div>
 <div class="absolute inset-0 border-[24px] border-white/5 opacity-50"></div>
 <div class="absolute top-8 left-8 w-12 h-12 border-t-4 border-l-4 border-white/20"></div>
@@ -228,6 +281,5 @@
             <span class="material-symbols-outlined" data-icon="description">description</span>
             <span class="text-[10px]">Mẫu phiếu</span>
         </a>
-    </div>
-<script src="../js/instant.js"></script>
+    </div>    <script src="../js/api.js"></script><script src="../js/instant.js?v=4"></script>
 </body></html>

@@ -14,7 +14,8 @@ const api = {
                 localStorage.removeItem('token');
                 window.location.href = 'login.html';
             }
-            throw new Error(`API error: ${response.status}`);
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || errorData.message || `API error: ${response.status}`);
         }
         return response.json();
     },
@@ -36,8 +37,55 @@ const api = {
         });
 
         if (!response.ok) {
+            if (response.status === 401) {
+                localStorage.removeItem('token');
+                window.location.href = 'login.html';
+            }
             const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.message || `API error: ${response.status}`);
+            throw new Error(errorData.error || errorData.message || `API error: ${response.status}`);
+        }
+        return response.json();
+    },
+
+    put: async (endpoint, data) => {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${BASE_URL}${endpoint}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': token ? `Bearer ${token}` : '',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!response.ok) {
+            if (response.status === 401) {
+                localStorage.removeItem('token');
+                window.location.href = 'login.html';
+            }
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || errorData.message || `API error: ${response.status}`);
+        }
+        return response.json();
+    },
+
+    delete: async (endpoint) => {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${BASE_URL}${endpoint}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': token ? `Bearer ${token}` : '',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!response.ok) {
+            if (response.status === 401) {
+                localStorage.removeItem('token');
+                window.location.href = 'login.html';
+            }
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(errorData.error || errorData.message || `API error: ${response.status}`);
         }
         return response.json();
     }

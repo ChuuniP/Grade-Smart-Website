@@ -47,6 +47,26 @@ def splitImg(img):
     boxes = []
     for y in range(cols):
         for x in range(rows):
+            col_start = piece_width * y
+            left_offset = 38
+            choices_width = 65
+            x_start = col_start + left_offset
+            x_end = x_start + choices_width
+            y_start = x * piece_height
+            y_end = y_start + piece_height
+            piece = img[y_start:y_end, x_start:x_end]
+            boxes.append(piece)
+    return boxes
+
+def splitImg120(img):
+    height, width = img.shape[:2]
+    rows = 2
+    cols = 4
+    piece_height = height // rows
+    piece_width = width // cols
+    boxes = []
+    for y in range(cols):
+        for x in range(rows):
             x_start = piece_width * y + (0 if y == 0 else 10)
             x_end = x_start + piece_width - (0 if y == cols - 1 else 15)
             y_start = x * piece_height
@@ -58,11 +78,29 @@ def splitImg(img):
 def splitAns(boxes):
     rows = 5
     cols = 4
-    height, width = boxes[0].shape[:2]
-    piece_height = height // rows
-    piece_width = width // cols
     ans = []
     for image in boxes:
+        height, width = image.shape[:2]
+        piece_height = height // rows
+        piece_width = width // cols
+        for y in range(rows):
+            for x in range(cols):
+                start_x = x * piece_width
+                end_x = start_x + piece_width
+                start_y = y * piece_height
+                end_y = start_y + piece_height
+                piece = image[start_y:end_y, start_x:end_x]
+                ans.append(piece)
+    return ans
+
+def splitAns120(boxes):
+    rows = 15
+    cols = 4
+    ans = []
+    for image in boxes:
+        height, width = image.shape[:2]
+        piece_height = height // rows
+        piece_width = width // cols
         for y in range(rows):
             for x in range(cols):
                 start_x = x * piece_width

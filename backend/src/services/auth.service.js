@@ -13,7 +13,10 @@ class AuthService {
   async login(identifier, password) {
     const user = await prisma.user.findFirst({
       where: {
-        username: identifier
+        OR: [
+          { username: identifier },
+          { email: identifier }
+        ]
       }
     });
     if (!user) throw new Error('Invalid credentials');

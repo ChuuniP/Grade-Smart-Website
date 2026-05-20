@@ -8,7 +8,8 @@ class OMRController {
       }
 
       const imagePath = req.file.path;
-      const result = await omrService.processImage(imagePath);
+      const answers = req.body.answers || null;
+      const result = await omrService.processImage(imagePath, answers);
 
       res.json(result);
     } catch (error) {

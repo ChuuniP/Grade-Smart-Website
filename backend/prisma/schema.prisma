@@ -34,33 +34,55 @@ model Template {
   linkImage      String   @map("link_image")
   totalQuestions Int      @default(0) @map("total_questions")
   type           String   @default("")
-  batches        Batch[]
+  results        Result[]
 
   @@map("templates")
 }
 
 model Batch {
-  id_batch    String      @id @default(uuid()) @db.Uuid
+  batch_id    String        @id @default(uuid()) @db.Uuid @map("batch_id")
   name        String
-  user        User        @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
-  id_user     String      @db.Uuid
-  template    Template?   @relation(fields: [id_template], references: [id_template], onDelete: SetNull)
-  id_template String?     @db.Uuid
-  tests       Test[]
-  time        DateTime    @default(now()) @map("time")
+  user        User          @relation(fields: [id_user], references: [id_user], onDelete: Cascade)
+  id_user     String        @db.Uuid @map("id_user")
+  result      Result?       @relation(fields: [result_id], references: [id_result], onDelete: SetNull)
+  result_id   String?       @db.Uuid @map("result_id")
+  total_tests Int           @default(0) @map("total_tests")
+  time        DateTime      @default(now()) @map("time")
+  details     BatchDetail[]
 
   @@map("batches")
 }
 
-model Test {
-  id_test     String   @id @default(uuid()) @db.Uuid
-  id_batch    String   @db.Uuid
-  batch       Batch    @relation(fields: [id_batch], references: [id_batch], onDelete: Cascade)
-  id_student  String?  @map("id_student")
-  test_code   String?  @map("test_code")
-  imageUrl    String   @map("image_url")
-  score       Float    @default(0.0)
-  status      String?  @map("status")
+model BatchDetail {
+  id         String  @id @default(uuid()) @db.Uuid @map("id")
+  batch_id   String  @db.Uuid @map("batch_id")
+  batch      Batch   @relation(fields: [batch_id], references: [batch_id], onDelete: Cascade)
+  file_name  String  @map("file_name")
+  student_id String? @map("student_id")
+  test_code  String? @map("test_code")
+  score      Float   @map("score")
 
-  @@map("tests")
+  @@map("batch_details")
+}
+
+model Result {
+  id_result      String         @id @default(uuid()) @db.Uuid @map("result_id")
+  name           String         @default("Bộ đáp án")
+  id_template    String         @db.Uuid @map("form_id")
+  template       Template       @relation(fields: [id_template], references: [id_template], onDelete: Cascade)
+  totalQuestions Int            @map("total_questions")
+  details        ResultDetail[]
+  batches        Batch[]
+
+  @@map("results")
+}
+
+model ResultDetail {
+  id        String @id @default(uuid()) @db.Uuid
+  id_result String @db.Uuid @map("result_id")
+  result    Result @relation(fields: [id_result], references: [id_result], onDelete: Cascade)
+  question  Int
+  answer    String
+
+  @@map("results_detail")
 }

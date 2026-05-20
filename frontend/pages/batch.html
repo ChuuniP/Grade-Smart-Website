@@ -162,37 +162,61 @@
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
 <div class="lg:col-span-8 space-y-lg">
 <section class="bg-white border border-outline-variant rounded-xl p-6 shadow-sm">
+                            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-blue-800 text-xl" data-icon="menu_book">menu_book</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-slate-800 text-base font-semibold">Chọn bộ đáp án chuẩn</h3>
+                                        <p class="text-slate-500 text-xs mt-0.5">Chọn bộ đáp án dùng làm tham chiếu để chấm bài thi hàng loạt</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <select id="batch-answer-set-select" class="w-full md:w-64 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+                                        <option value="">Đang tải bộ đáp án...</option>
+                                    </select>
+                                </div>
+                            </div>
+</section>
+<section class="bg-white border border-outline-variant rounded-xl p-6 shadow-sm">
                             <div id="drop-zone" class="border-2 border-dashed border-slate-300 rounded-xl py-12 px-8 flex flex-col items-center justify-center text-center bg-slate-50/50 hover:bg-slate-50 transition-colors cursor-pointer group">
                                 <input type="file" id="file-input" multiple class="hidden" accept="image/*">
-                                <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                                    <span class="material-symbols-outlined text-blue-800 text-3xl" data-icon="upload">upload</span>
+                                <div id="drop-zone-content" class="flex flex-col items-center justify-center text-center w-full">
+                                    <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                        <span class="material-symbols-outlined text-blue-800 text-3xl" data-icon="upload">upload</span>
+                                    </div>
+                                    <h3 class="text-body-lg font-semibold text-slate-800">Kéo và thả các tệp hình ảnh vào đây</h3>
+                                    <p class="text-body-sm text-slate-500 mt-2 mb-2">Hỗ trợ JPG, PNG, tối đa 50MB (Chỉ nhận tệp hình ảnh)</p>
+                                    <p class="text-body-sm text-slate-500 mb-4">Bạn có thể chọn nhiều ảnh cùng lúc và thêm ảnh mới trước khi bắt đầu chấm.</p>
+                                    <button type="button" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg text-sm transition-colors shadow-sm">
+                                        Chọn ảnh từ thiết bị
+                                    </button>
                                 </div>
-                                <h3 class="text-body-lg font-semibold text-slate-800">Kéo và thả tệp tại đây hoặc nhấp để chọn tệp</h3>
-                                <p class="text-body-sm text-slate-500 mt-2">Hỗ trợ JPG, PNG, tối đa 50MB (Chỉ nhận tệp hình ảnh)</p>
                             </div>
 </section>
 <section class="bg-white border border-outline-variant rounded-xl p-6 shadow-sm overflow-hidden">
 <div class="flex items-center justify-between mb-6">
 <h3 class="text-h3 text-slate-800">Tiến trình xử lý</h3>
-<button class="px-6 py-2.5 bg-primary text-white rounded-full font-semibold flex items-center gap-2 hover:bg-primary-container transition-all active:scale-95">
+<button id="start-batch-btn" class="px-6 py-2.5 bg-primary text-white rounded-full font-semibold flex items-center gap-2 hover:bg-primary-container transition-all active:scale-95">
 <span class="material-symbols-outlined text-xl" data-icon="play_arrow">play_arrow</span>
                                         Bắt đầu chấm bài
                                     </button>
 </div>
 <div class="mb-4">
 <div class="flex justify-between items-center mb-2">
-<span class="text-label-md text-slate-600">Đang nhận diện phiếu: Phieu_09.png</span>
-<span class="text-label-md font-bold text-primary">65%</span>
+<span id="progress-text" class="text-label-md text-slate-600">Chưa bắt đầu chấm bài (Tải ảnh lên trước)</span>
+<span id="progress-percent" class="text-label-md font-bold text-primary">0%</span>
 </div>
 <div class="h-3 w-full bg-blue-50 rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full" style="width: 65%"></div>
+<div id="progress-bar" class="h-full bg-primary rounded-full transition-all duration-300" style="width: 0%"></div>
 </div>
 </div>
 </section>
 <section class="bg-white border border-outline-variant rounded-xl shadow-sm overflow-hidden">
 <div class="p-6 border-b border-slate-100 flex items-center justify-between bg-white">
 <h3 class="text-h3 text-slate-800">Kết quả chấm bài</h3>
-<button class="flex items-center gap-2 px-4 py-2 border border-blue-800 text-blue-800 rounded-lg hover:bg-blue-50 transition-colors font-medium text-sm">
+<button id="export-btn" class="flex items-center gap-2 px-4 py-2 border border-blue-800 text-blue-800 rounded-lg hover:bg-blue-50 transition-colors font-medium text-sm">
 <span class="material-symbols-outlined text-lg" data-icon="download">download</span>
                                         Xuất file Excel
                                     </button>
@@ -201,36 +225,16 @@
 <table class="w-full text-left border-collapse">
 <thead class="bg-slate-50">
 <tr>
+<th class="px-6 py-4 text-label-sm text-slate-500 tracking-wider">TÊN FILE</th>
 <th class="px-6 py-4 text-label-sm text-slate-500 tracking-wider">MÃ HỌC SINH</th>
 <th class="px-6 py-4 text-label-sm text-slate-500 tracking-wider">MÃ ĐỀ</th>
 <th class="px-6 py-4 text-label-sm text-slate-500 tracking-wider">ĐIỂM SỐ</th>
 <th class="px-6 py-4 text-label-sm text-slate-500 tracking-wider text-right">TRẠNG THÁI</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-slate-100">
-<tr class="hover:bg-slate-50 transition-colors">
-<td class="px-6 py-4 text-body-sm font-semibold text-slate-700">HS2024-001</td>
-<td class="px-6 py-4 text-body-sm text-slate-600">101</td>
-<td class="px-6 py-4 text-body-sm font-bold text-slate-800">9.5</td>
-<td class="px-6 py-4 text-right">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">Hợp lệ</span>
-</td>
-</tr>
-<tr class="hover:bg-slate-50 transition-colors">
-<td class="px-6 py-4 text-body-sm font-semibold text-slate-700">HS2024-002</td>
-<td class="px-6 py-4 text-body-sm text-slate-600">101</td>
-<td class="px-6 py-4 text-body-sm font-bold text-slate-800">8.0</td>
-<td class="px-6 py-4 text-right">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">Hợp lệ</span>
-</td>
-</tr>
-<tr class="hover:bg-slate-50 transition-colors">
-<td class="px-6 py-4 text-body-sm font-semibold text-slate-700">Chưa nhận diện</td>
-<td class="px-6 py-4 text-body-sm text-slate-600">--</td>
-<td class="px-6 py-4 text-body-sm font-bold text-slate-800">--</td>
-<td class="px-6 py-4 text-right">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-800">Lỗi mã tô</span>
-</td>
+<tbody id="results-table-body" class="divide-y divide-slate-100">
+<tr id="empty-table-row">
+<td colspan="5" class="px-6 py-8 text-center text-slate-400 italic">Chưa có kết quả chấm bài. Hãy tải ảnh lên và nhấn bắt đầu chấm.</td>
 </tr>
 </tbody>
 </table>
@@ -242,50 +246,39 @@
 <h3 class="text-label-sm text-slate-400 mb-4 uppercase tracking-widest">Bộ kiểm tra hợp lệ</h3>
 <div class="grid grid-cols-3 gap-2 mb-6">
 <div class="bg-slate-50 p-3 rounded-lg text-center">
-<p class="text-xl font-bold text-slate-800">15</p>
+<p id="total-files-count" class="text-xl font-bold text-slate-800">0</p>
 <p class="text-[10px] text-slate-500 uppercase">Tổng cộng</p>
 </div>
 <div class="bg-green-50 p-3 rounded-lg text-center">
-<p class="text-xl font-bold text-green-700">12</p>
+<p id="valid-files-count" class="text-xl font-bold text-green-700">0</p>
 <p class="text-[10px] text-green-600 uppercase">Hợp lệ</p>
 </div>
 <div class="bg-red-50 p-3 rounded-lg text-center">
-<p class="text-xl font-bold text-red-700">3</p>
+<p id="error-files-count" class="text-xl font-bold text-red-700">0</p>
 <p class="text-[10px] text-red-600 uppercase">Lỗi</p>
 </div>
 </div>
-<div class="space-y-2 max-h-64 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-200">
-<div class="flex items-center justify-between p-2 rounded border border-slate-100 text-xs">
-<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-slate-400" data-icon="image">image</span> Phieu_01.jpg</span>
-<span class="text-green-600 font-bold">Hợp lệ</span>
-</div>
-<div class="flex items-center justify-between p-2 rounded border border-slate-100 text-xs">
-<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-slate-400" data-icon="image">image</span> Phieu_02.png</span>
-<span class="text-green-600 font-bold">Hợp lệ</span>
-</div>
-<div class="flex items-center justify-between p-2 rounded border border-red-100 bg-red-50/50 text-xs">
-<span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-red-400" data-icon="warning">warning</span> Phieu_03.jpg</span>
-<span class="text-red-600 font-bold">Không hợp lệ</span>
-</div>
+<div id="checklist-container" class="space-y-2 max-h-64 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-slate-200">
+<div class="text-slate-400 italic text-center py-8 text-xs">Chưa có tệp nào được chọn.</div>
 </div>
 </section>
 <section class="bg-white border border-outline-variant rounded-xl p-6 shadow-sm">
 <h3 class="text-h3 text-slate-800 mb-6">Biểu đồ phân bổ điểm số</h3>
 <div class="h-48 flex items-end justify-between gap-2 px-2 border-b border-slate-100">
-<div class="flex-1 bg-blue-100 rounded-t-sm group relative" style="height: 15%">
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity">2 HS</div>
+<div class="flex-1 bg-blue-100 rounded-t-sm group relative transition-all duration-500" id="bar-0-2" style="height: 0%">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity whitespace-nowrap" id="bar-text-0-2">0 HS</div>
 </div>
-<div class="flex-1 bg-blue-200 rounded-t-sm group relative" style="height: 35%">
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity">5 HS</div>
+<div class="flex-1 bg-blue-200 rounded-t-sm group relative transition-all duration-500" id="bar-2-4" style="height: 0%">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity whitespace-nowrap" id="bar-text-2-4">0 HS</div>
 </div>
-<div class="flex-1 bg-blue-400 rounded-t-sm group relative" style="height: 60%">
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity">8 HS</div>
+<div class="flex-1 bg-blue-400 rounded-t-sm group relative transition-all duration-500" id="bar-4-6" style="height: 0%">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity whitespace-nowrap" id="bar-text-4-6">0 HS</div>
 </div>
-<div class="flex-1 bg-primary rounded-t-sm group relative" style="height: 90%">
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity">12 HS</div>
+<div class="flex-1 bg-primary rounded-t-sm group relative transition-all duration-500" id="bar-6-8" style="height: 0%">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity whitespace-nowrap" id="bar-text-6-8">0 HS</div>
 </div>
-<div class="flex-1 bg-blue-600 rounded-t-sm group relative" style="height: 45%">
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity">6 HS</div>
+<div class="flex-1 bg-blue-600 rounded-t-sm group relative transition-all duration-500" id="bar-8-10" style="height: 0%">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-slate-800 text-white text-[10px] px-1.5 py-0.5 rounded transition-opacity whitespace-nowrap" id="bar-text-8-10">0 HS</div>
 </div>
 </div>
 <div class="flex justify-between mt-2 text-[10px] text-slate-400 font-bold px-2">
@@ -298,15 +291,15 @@
 <div class="mt-6 space-y-3">
 <div class="flex justify-between items-center text-body-sm">
 <span class="text-slate-500">Trung bình:</span>
-<span class="font-bold text-slate-800">7.8</span>
+<span id="average-score" class="font-bold text-slate-800">--</span>
 </div>
 <div class="flex justify-between items-center text-body-sm">
 <span class="text-slate-500">Cao nhất:</span>
-<span class="font-bold text-primary">10.0</span>
+<span id="max-score" class="font-bold text-primary">--</span>
 </div>
 <div class="flex justify-between items-center text-body-sm">
 <span class="text-slate-500">Thấp nhất:</span>
-<span class="font-bold text-error">4.5</span>
+<span id="min-score" class="font-bold text-error">--</span>
 </div>
 </div>
 </section>
@@ -330,5 +323,7 @@
 <span class="text-[10px]">Mẫu phiếu</span>
 </a>
 </div>
+<script src="../js/auth-check.js"></script>
+<script src="../js/api.js"></script>
 <script src="../js/batch.js"></script>
 </body></html>

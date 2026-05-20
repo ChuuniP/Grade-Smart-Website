@@ -3,18 +3,21 @@ const path = require('path');
 const fs = require('fs/promises');
 
 class OMRService {
-  async processImage(imagePath) {
+  async processImage(imagePath, answers = null) {
     imagePath = path.resolve(imagePath);
     await fs.access(imagePath);
 
     const scriptPath = path.join(__dirname, '..', '..', 'ref', 'mainOmr.py');
     const scriptCwd = path.dirname(scriptPath);
+    
+    const argsSuffix = answers ? [imagePath, answers] : [imagePath];
+
     const pythonCandidates = [
-      { command: process.env.PYTHON || 'python', args: ['-X', 'utf8', scriptPath, imagePath] },
-      { command: 'py', args: ['-3', '-X', 'utf8', scriptPath, imagePath] },
-      { command: 'python3', args: ['-X', 'utf8', scriptPath, imagePath] },
-      { command: 'python3.10', args: ['-X', 'utf8', scriptPath, imagePath] },
-      { command: 'python3.11', args: ['-X', 'utf8', scriptPath, imagePath] }
+      { command: process.env.PYTHON || 'python', args: ['-X', 'utf8', scriptPath, ...argsSuffix] },
+      { command: 'py', args: ['-3', '-X', 'utf8', scriptPath, ...argsSuffix] },
+      { command: 'python3', args: ['-X', 'utf8', scriptPath, ...argsSuffix] },
+      { command: 'python3.10', args: ['-X', 'utf8', scriptPath, ...argsSuffix] },
+      { command: 'python3.11', args: ['-X', 'utf8', scriptPath, ...argsSuffix] }
     ];
 
     const runPython = ({ command, args }) => {

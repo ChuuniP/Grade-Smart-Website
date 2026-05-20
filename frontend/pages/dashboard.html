@@ -162,7 +162,7 @@
 <!-- Quick Navigation Section -->
 <section class="mb-12">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div class="group relative overflow-hidden bg-white border border-slate-200 p-8 rounded-xl hover:border-primary transition-all duration-300 flex items-center justify-between cursor-pointer" id="nav-batch">
+<a href="batch.html" class="group relative overflow-hidden bg-white border border-slate-200 p-8 rounded-xl hover:border-primary transition-all duration-300 flex items-center justify-between cursor-pointer" id="nav-batch">
 <div class="z-10">
 <div class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center mb-4 text-primary">
 <span class="material-symbols-outlined" data-icon="layers">layers</span>
@@ -176,14 +176,14 @@
 <div class="absolute -right-4 -bottom-4 opacity-5 pointer-events-none transform group-hover:scale-110 transition-transform duration-500">
 <span class="material-symbols-outlined text-9xl" data-icon="layers">layers</span>
 </div>
-</div>
-<div class="group relative overflow-hidden bg-primary p-8 rounded-xl hover:shadow-xl transition-all duration-300 flex items-center justify-between cursor-pointer" id="nav-instant">
+</a>
+<a href="instant.html" class="group relative overflow-hidden bg-primary p-8 rounded-xl hover:shadow-xl transition-all duration-300 flex items-center justify-between cursor-pointer" id="nav-instant">
 <div class="z-10">
 <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mb-4 text-white">
 <span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
 </div>
-<h3 class="text-h3 font-h3 text-white mb-2">Chấm điểm Thời gian thực</h3>
-<p class="text-body-sm text-blue-100 max-w-xs">Sử dụng camera của bạn để chấm điểm từng trang ngay lập tức với phản hồi trực tiếp về lỗi.</p>
+<h3 class="text-h3 font-h3 text-white mb-2">Chấm đơn lẻ</h3>
+<p class="text-body-sm text-blue-100 max-w-xs">Chấm điểm từng bài làm bằng camera hoặc tải lên hình ảnh để xem kết quả tức thì.</p>
 </div>
 <div class="z-10 text-white">
 <span class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform" data-icon="bolt">bolt</span>
@@ -191,7 +191,7 @@
 <div class="absolute -right-4 -bottom-4 opacity-10 pointer-events-none transform group-hover:scale-110 transition-transform duration-500">
 <span class="material-symbols-outlined text-9xl text-white" data-icon="qr_code_scanner">qr_code_scanner</span>
 </div>
-</div>
+</a>
 </div>
 </section>
 <!-- Answer Sheet Template Management -->
@@ -230,7 +230,7 @@
 </div>
 </div>
 <!-- Template Card 2 -->
-<div class="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow group border-primary/20 shadow-sm">
+<div class="bg-white border border-slate-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow group">
 <div class="h-56 bg-slate-100 overflow-hidden relative">
 <img alt="50-question sheet thumbnail" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close up of a 50-question optical mark recognition OMR sheet with rows of bubbles and a clean corporate academic layout" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXJDolQq5oT64a6PaepfeWvSr9N3XHcS-4De1WcgmBDbnioOGMdcanPz9e0yS_MZuI7t1j6JeDsKbmpjBnPNuLZXMStYbhoPMgXbijoMIs1zCMSANsquxjzALwiCAwXV2b4FiGPx_FWUKZLq4szPKCGacfiq-Fma6r2__17N4I0Md1p6k_NUqxo5WBLN8Ofq8KdJllWOuiS52mGgwnud1H5g6Qn-N4f1Qj6gmjs2jPrCIogbUZnuILjDhWl4WzR6ruwhxJQWt_byqP"/>
 </div>
@@ -251,7 +251,7 @@
 <span>Trang A4</span>
 </div>
 </div>
-<button class="w-full flex items-center justify-center gap-2 bg-primary text-white font-bold py-2.5 rounded-lg hover:bg-blue-800 transition-all shadow-md">
+<button class="w-full flex items-center justify-center gap-2 bg-white border-2 border-primary text-primary font-bold py-2.5 rounded-lg hover:bg-primary hover:text-white transition-all">
 <span class="material-symbols-outlined" data-icon="download">download</span>
 <span>Tải xuống PDF</span>
 </button>
@@ -287,6 +287,71 @@
 </div>
 </div>
 </section>
+
+<!-- Batch History Section -->
+<section class="mt-12 mb-12">
+  <div class="flex flex-col gap-2 mb-6">
+    <h2 class="text-h2 font-h2 text-blue-900">Lịch sử chấm bài hàng loạt</h2>
+    <p id="dashboard-current-user" class="text-body-sm text-slate-500">Đang hiển thị lịch sử chấm bài của người dùng hiện tại.</p>
+  </div>
+  
+  <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-slate-200">
+        <thead class="bg-slate-50">
+          <tr>
+            <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Tên Đợt</th>
+            <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Bộ Đáp Án</th>
+            <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Số Bài Chấm</th>
+            <th class="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Thời Gian</th>
+            <th class="px-6 py-4 text-center text-xs font-bold text-slate-500 uppercase tracking-wider">Hành Động</th>
+          </tr>
+        </thead>
+        <tbody id="batches-table-body" class="bg-white divide-y divide-slate-100">
+          <tr>
+            <td colspan="5" class="px-6 py-8 text-center text-slate-400 italic">Đang tải lịch sử chấm bài...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Detail Modal for Batch Details -->
+<div id="batch-details-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm hidden">
+  <div class="bg-white w-full max-w-4xl max-h-[85vh] rounded-xl shadow-xl overflow-hidden flex flex-col">
+    <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+      <div>
+        <h3 id="modal-batch-name" class="font-bold text-slate-900 text-lg">Chi tiết đợt chấm</h3>
+        <p id="modal-batch-meta" class="text-xs text-slate-500 mt-1"></p>
+      </div>
+      <button id="close-modal-btn" class="w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:bg-slate-200 hover:text-slate-700 transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    
+    <div class="flex-1 overflow-y-auto p-6">
+      <table class="min-w-full divide-y divide-slate-200">
+        <thead class="bg-slate-50">
+          <tr>
+            <th class="px-6 py-3.5 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Tên file</th>
+            <th class="px-6 py-3.5 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Mã học sinh</th>
+            <th class="px-6 py-3.5 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Mã đề</th>
+            <th class="px-6 py-3.5 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">Điểm số</th>
+          </tr>
+        </thead>
+        <tbody id="batch-details-table-body" class="bg-white divide-y divide-slate-100">
+          <!-- Populated dynamically -->
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex justify-end">
+      <button id="close-modal-footer-btn" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold rounded-lg text-sm transition-colors">Đóng</button>
+    </div>
+  </div>
+</div>
+
 </div>
 </main>
     <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center h-16 px-4 z-50">
