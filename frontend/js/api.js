@@ -1,6 +1,6 @@
 const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:3000'
-    : 'https://grade-smart-backend.onrender.com'; // Thay link Render của bạn tại đây nếu khác
+    : 'https://grade-smart-website.onrender.com'; // Thay link Render của bạn tại đây nếu khác
 
 const BASE_URL = `${BACKEND_URL}/api`;
 
