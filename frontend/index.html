@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi" class="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="3; url=pages/login.html" />
+    <title>Grade Smart AI - Hệ thống chấm điểm trắc nghiệm thông minh</title>
+    
+    <!-- TailWind CSS & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: "#00288e",
+                        accent: "#3755c3",
+                        darkBlue: "#091a44",
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .gradient-mesh {
+            background-color: #091a44;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(55, 85, 195, 0.4) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(0, 40, 142, 0.5) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(99, 102, 241, 0.25) 0px, transparent 50%);
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card-hover:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-15px) scale(1.05); }
+        }
+        
+        .floating-blob {
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-blob-delay {
+            animation: float 10s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+
+        /* Countdown Progress Bar Animation */
+        @keyframes progress {
+            0% { width: 100%; }
+            100% { width: 0%; }
+        }
+        .progress-bar {
+            animation: progress 3s linear forwards;
+        }
+    </style>
+</head>
+<body class="gradient-mesh min-h-screen text-slate-100 font-sans flex flex-col justify-between overflow-x-hidden relative">
+    
+    <!-- Background Floating Light Blobs -->
+    <div class="absolute top-[20%] left-[10%] -z-10 w-72 h-72 bg-blue-600/20 rounded-full blur-[100px] floating-blob"></div>
+    <div class="absolute bottom-[20%] right-[10%] -z-10 w-96 h-96 bg-indigo-500/15 rounded-full blur-[120px] floating-blob-delay"></div>
+
+    <!-- Header Navigation -->
+    <header class="w-full max-w-7xl mx-auto px-6 py-6 flex justify-between items-center z-10">
+        <div class="flex items-center gap-2.5">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-accent to-blue-400 flex items-center justify-center shadow-lg shadow-accent/20">
+                <span class="material-symbols-outlined text-white text-2xl font-bold">school</span>
+            </div>
+            <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-blue-200 bg-clip-text text-transparent font-outfit">Grade Smart</span>
+        </div>
+        <div>
+            <a href="pages/login.html" class="glass-card px-5 py-2.5 rounded-xl font-semibold text-sm hover:bg-white/10 transition-all border border-white/10 flex items-center gap-2 group">
+                Đăng nhập
+                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <main class="w-full max-w-7xl mx-auto px-6 py-12 flex flex-col items-center justify-center text-center z-10 flex-grow">
+        
+        <!-- Redirect Notification Banner -->
+        <div class="mb-6 inline-flex flex-col items-center gap-2 px-5 py-2.5 rounded-full glass-card border border-white/10 shadow-lg text-xs md:text-sm text-slate-300">
+            <div class="flex items-center gap-2">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span>Đang kết nối tới máy chủ... Tự động chuyển tiếp sau <span id="countdown" class="font-bold text-white">3</span>s</span>
+            </div>
+            <!-- Progress Bar -->
+            <div class="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-accent to-blue-400 progress-bar rounded-full"></div>
+            </div>
+        </div>
+
+        <!-- Hero Content -->
+        <h1 class="text-4xl md:text-6xl font-extrabold font-outfit tracking-tight leading-tight max-w-4xl mx-auto mb-6">
+            Hệ Thống Chấm Điểm Trắc Nghiệm <br/>
+            <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-white bg-clip-text text-transparent">Thông Minh Bằng Công Nghệ AI</span>
+        </h1>
+        
+        <p class="text-slate-400 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+            Giải pháp số hóa học đường tiên tiến giúp chấm điểm bài thi OMR chuẩn hóa tự động qua camera và quét ảnh hàng loạt với độ chính xác 100%.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 mb-16 justify-center">
+            <a href="pages/login.html" class="px-8 py-4 rounded-xl bg-gradient-to-r from-accent to-indigo-500 hover:from-blue-600 hover:to-indigo-600 font-bold text-white shadow-lg shadow-accent/25 hover:shadow-accent/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                Truy cập ứng dụng ngay
+                <span class="material-symbols-outlined">bolt</span>
+            </a>
+            <a href="#features" class="px-8 py-4 rounded-xl glass-card font-bold hover:bg-white/5 border border-white/10 transition-all flex items-center justify-center gap-2">
+                Khám phá tính năng
+                <span class="material-symbols-outlined text-[18px]">keyboard_double_arrow_down</span>
+            </a>
+        </div>
+
+        <!-- Feature Grid (Premium Look) -->
+        <section id="features" class="w-full grid grid-cols-1 md:grid-cols-3 gap-6 text-left mt-4">
+            
+            <!-- Card 1 -->
+            <div class="glass-card glass-card-hover p-8 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-6">
+                        <span class="material-symbols-outlined text-2xl">layers</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-outfit text-white mb-2">Chấm hàng loạt</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Tải lên đồng thời hàng chục phiếu bài làm học sinh. Hệ thống tự động phân loại mã đề, nhận dạng mã học sinh và xuất bảng điểm chi tiết.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="glass-card glass-card-hover p-8 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-6">
+                        <span class="material-symbols-outlined text-2xl">qr_code_scanner</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-outfit text-white mb-2">Chấm thi tức thì</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Sử dụng camera điện thoại hoặc webcam để quét nhanh từng phiếu trả lời. Kết quả điểm số và phân tích đáp án sai hiển thị ngay tức thì.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="glass-card glass-card-hover p-8 rounded-2xl flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-6">
+                        <span class="material-symbols-outlined text-2xl">description</span>
+                    </div>
+                    <h3 class="text-lg font-bold font-outfit text-white mb-2">Quản lý mẫu phiếu</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Hỗ trợ các loại mẫu phiếu trắc nghiệm chuẩn từ 20 câu, 50 câu đến 120 câu. Dễ dàng tải xuống file PDF chất lượng cao để in ấn trực tiếp.
+                    </p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs md:text-sm text-slate-500 gap-4 z-10">
+        <p>© 2026 Grade Smart AI. Tất cả quyền được bảo lưu.</p>
+        <div class="flex items-center gap-6">
+            <a href="#" class="hover:text-slate-300 transition-colors">Điều khoản dịch vụ</a>
+            <a href="#" class="hover:text-slate-300 transition-colors">Chính sách bảo mật</a>
+        </div>
+    </footer>
+
+    <!-- Countdown & Redirect Script -->
+    <script>
+        let countdownElement = document.getElementById('countdown');
+        let timeLeft = 3;
+        
+        const interval = setInterval(() => {
+            timeLeft--;
+            if (countdownElement) {
+                countdownElement.textContent = timeLeft;
+            }
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                window.location.href = "pages/login.html";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

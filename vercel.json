@@ -1,0 +1,10 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/frontend/pages/login.html",
+      "permanent": false
+    }
+  ]
+}
