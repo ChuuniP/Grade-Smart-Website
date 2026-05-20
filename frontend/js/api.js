@@ -1,6 +1,12 @@
-const BASE_URL = 'http://localhost:3000/api';
+const BACKEND_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3000'
+    : 'https://grade-smart-backend.onrender.com'; // Thay link Render của bạn tại đây nếu khác
+
+const BASE_URL = `${BACKEND_URL}/api`;
 
 const api = {
+    BACKEND_URL,
+    BASE_URL,
     get: async (endpoint) => {
         const token = localStorage.getItem('token');
         const response = await fetch(`${BASE_URL}${endpoint}`, {

@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             };
             const getTemplateDownloadUrl = (template) => {
                 if (!template || !template.id_template) return '#';
-                return `http://localhost:3000/api/templates/${template.id_template}/download`;
+                return `${window.api.BASE_URL}/templates/${template.id_template}/download`;
             };
             const getTemplateDescription = (template) => {
                 if (!template) return 'Dung lượng cao';

@@ -1,0 +1,12 @@
+node_modules
+.env
+.git
+.gitignore
+README.md
+debug_crops/
+graded_MDD.jpg.jpg
+MDD.jpg
+uploads/*
+!uploads/.gitkeep
+templates/*
+!templates/.gitkeep

@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const answerSetsContent = document.getElementById('answer-sets-content');
     const toggleAnswerSetsBtn = document.getElementById('toggle-answer-sets-btn');
     const toggleAnswerSetsIcon = document.getElementById('toggle-answer-sets-icon');
-    const apiUrl = 'http://localhost:3000/api/omr/process';
+    const apiUrl = `${window.api.BASE_URL}/omr/process`;
 
     const gradedImageContainer = document.getElementById('graded-image-container');
     const gradedImage = document.getElementById('graded-image');
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Hiển thị ảnh sau khi chấm (nếu backend trả về)
         if (data.gradedImagePath && gradedImage && gradedImageContainer) {
-            gradedImage.src = `http://localhost:3000/uploads/${data.gradedImagePath}`;
+            gradedImage.src = `${window.api.BACKEND_URL}/uploads/${data.gradedImagePath}`;
             gradedImageContainer.classList.remove('hidden');
             if (scanContainer) {
                 scanContainer.classList.add('hidden');
@@ -796,7 +796,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                 } catch (e) {
                     console.warn('Không thể tải MDD.jpg từ frontend local, thử tải từ backend...', e);
-                    response = await fetch('http://localhost:3000/uploads/MDD.jpg');
+                    response = await fetch(`${window.api.BACKEND_URL}/uploads/MDD.jpg`);
                 }
 
                 if (!response.ok) {
