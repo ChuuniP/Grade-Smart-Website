@@ -15,6 +15,7 @@ app.use(express.json());
 
 app.use('/templates', express.static(path.join(__dirname, '../templates')));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+app.use(express.static(path.join(__dirname, '../../frontend')));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/templates', templateRoutes);
