@@ -1,6 +1,4 @@
 {
-  "installCommand": "cd frontend && npm install",
-  "buildCommand": "cd frontend && npm install",
   "outputDirectory": "frontend",
   "cleanUrls": true,
   "redirects": [
@@ -8,6 +6,20 @@
       "source": "/",
       "destination": "/pages/login.html",
       "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://grade-smart-backend.onrender.com/api/:path*"
+    },
+    {
+      "source": "/templates/:path*",
+      "destination": "https://grade-smart-backend.onrender.com/templates/:path*"
+    },
+    {
+      "source": "/uploads/:path*",
+      "destination": "https://grade-smart-backend.onrender.com/uploads/:path*"
     }
   ]
 }
