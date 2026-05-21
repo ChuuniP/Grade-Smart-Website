@@ -11,15 +11,15 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://grade-smart-backend.onrender.com/api/:path*"
+      "destination": "https://grade-smart-website.onrender.com/api/:path*"
     },
     {
       "source": "/templates/:path*",
-      "destination": "https://grade-smart-backend.onrender.com/templates/:path*"
+      "destination": "https://grade-smart-website.onrender.com/templates/:path*"
     },
     {
       "source": "/uploads/:path*",
-      "destination": "https://grade-smart-backend.onrender.com/uploads/:path*"
+      "destination": "https://grade-smart-website.onrender.com/uploads/:path*"
     }
   ]
 }
